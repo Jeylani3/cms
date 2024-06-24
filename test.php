@@ -1,15 +1,51 @@
 <?php
-// Define DS if not already defined
-if (!defined('DS')) {
-    define('DS', DIRECTORY_SEPARATOR);
-}
 
-// Example $parts array
-$parts = ['core', 'cms', 'cms'];
-// echo "<h1>" . array_pop($parts) . "</h1>";
+$books = [
+    [
+        "name" => "To Kill a Mockingbird",
+        "author" => "Harper Lee",
+        "purchase_url" => "https://www.example.com/to-kill-a-mockingbird",
+        "release_year" => 1960
+    ],
+    [
+        "name" => "1984",
+        "author" => "George Orwell",
+        "purchase_url" => "https://www.example.com/1984",
+        "release_year" => 1949
+    ],
+    [
+        "name" => "The Great Gatsby",
+        "author" => "F. Scott Fitzgerald",
+        "purchase_url" => "https://www.example.com/the-great-gatsby",
+        "release_year" => 1925
+    ],
+    [
+        "name" => "The Catcher in the Rye",
+        "author" => "F. Scott Fitzgerald",
+        "purchase_url" => "https://www.example.com/the-catcher-in-the-rye",
+        "release_year" => 1951
+    ]
+];
 
-// Imploding with DS
-$path = strtolower(implode(DS, $parts));
+function filter ($items, $fn) {
+   
+    $filteredItems = [];
+    
 
-echo '<h3>Path</h3>';
-var_dump($path); // Output the resulting path
+    foreach ($items as $item) {
+        if ($fn($item)) {
+            $filteredItems[] = $item;     
+        }       
+    }
+    return $filteredItems;
+};
+
+// $fileteredBooks = filter($books, 'release_year' , 1960);
+    // $fileteredBooks = filter($books, function($book){
+    //     return $book['release_year'] <= 2000;
+    // });
+    $fileteredBooks = array_filter($books, function($book){
+        return $book['release_year'] <= 2000;
+    });
+
+require 'test.view.php';

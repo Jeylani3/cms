@@ -40,6 +40,10 @@ use Core\Config;
 $dbHost = Config::get('db_host');
 // Access configuration settings
 $dbName = Config::get('db_name');
+$rootDir = Config::get('root_dir');
+
+define('ROOT', $rootDir);
+$url = $_SERVER['REQUEST_URI'];
 
 // Output the configuration to verify
 echo "</br>Database Host: <br>";
@@ -47,3 +51,7 @@ echo "Database Host: " . $dbHost . "<br>";
 
 echo "</br>Database Name: <br>";
 echo "Database Name: " . $dbName. "<br>";
+var_dump($rootDir);
+var_dump(ROOT);
+echo '<h3>Full URL</h3>';
+var_dump($url);
